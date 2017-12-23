@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.wayne.homesecurity.MainActivity"
+    android:layout_marginBottom="20dp"
+    android:layout_marginTop="10dp"
+    >
+
+    <TextView
+        android:id="@+id/CameraPanTiltLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Camera Pan Slider"
+        tools:text="Camera Pan Slider"
+        android:padding="10dp"
+        android:background="#EEEEEE"/>
+
+    <SeekBar
+        android:id="@+id/cameraSeekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="180"
+        android:visibility="visible"
+        android:padding="15dp"/>
+
+    <TextView
+        android:id="@+id/cameraMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Camera angle : "
+        android:padding="10dp"/>
+
+    <ToggleButton
+        android:id="@+id/alarmToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToggleButton" />
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
