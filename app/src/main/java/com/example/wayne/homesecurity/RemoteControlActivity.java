@@ -1,7 +1,7 @@
 package com.example.wayne.homesecurity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
@@ -14,9 +14,8 @@ import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-public class MainActivity extends AppCompatActivity {
+public class RemoteControlActivity extends AppCompatActivity {
     private SeekBar camSeekbar;
     private TextView camTextview;
     private ToggleButton alarmToggle;
@@ -55,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
             token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Toast.makeText(MainActivity.this, "MQTT Connected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RemoteControlActivity.this, "MQTT Connected", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Toast.makeText(MainActivity.this, "MQTT Connection Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RemoteControlActivity.this, "MQTT Connection Failed", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     private void publishMQTT(final String topic, final String message) {
         try {
             client.publish(topic, message.getBytes(), 0, false);
-            Toast.makeText(MainActivity.this, "Topic: " + topic + "  || Msg: " + message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(RemoteControlActivity.this, "Topic: " + topic + "  || Msg: " + message, Toast.LENGTH_SHORT).show();
         } catch (MqttException e) {
             e.printStackTrace();
         }
