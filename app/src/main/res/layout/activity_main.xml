@@ -1,49 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.wayne.homesecurity.RemoteControlActivity"
-    android:layout_marginBottom="20dp"
-    android:layout_marginTop="10dp"
-    >
+    tools:context="com.example.wayne.homesecurity.RemoteControlActivity">
 
-    <TextView
-        android:id="@+id/CameraPanTiltLabel"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Camera Pan Slider"
-        tools:text="Camera Pan Slider"
-        android:padding="10dp"
-        android:background="#EEEEEE"/>
-
-    <SeekBar
-        android:id="@+id/cameraSeekbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="180"
-        android:visibility="visible"
-        android:padding="15dp"/>
-
-    <TextView
-        android:id="@+id/cameraMsg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Camera angle : "
-        android:padding="10dp"/>
-
-    <ToggleButton
-        android:id="@+id/alarmToggle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ToggleButton" />
-
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
 
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/CameraLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E0E0E0"
+            android:padding="7dp"
+            android:text="Camera"
+            android:textColor="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="0&#176;" />
+
+            <SeekBar
+                android:id="@+id/cameraSeekbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="30"
+                android:max="180"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="180&#176;" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0&#176;" />
+
+            <Button
+                android:id="@+id/button45"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="45&#176;" />
+
+            <Button
+                android:id="@+id/button90"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="90&#176;" />
+
+            <Button
+                android:id="@+id/button135"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="135&#176;" />
+
+            <Button
+                android:id="@+id/button180"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="180&#176;" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/cameraMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Camera angle : 0&#176;"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <EditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:text="http://192.168.xxx.xxx:8090"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/connect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:padding="15dp"
+                android:text="Connect"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="350dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/AlarmLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#E0E0E0"
+            android:padding="7dp"
+            android:text="Alarm"
+            android:textColor="#000000" />
+
+        <ToggleButton
+            android:id="@+id/alarmToggle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:checked="false"
+            android:text="ToggleButton"
+            android:textOff="OFF"
+            android:textOn="ON" />
+
+    </LinearLayout>
+
+</ScrollView>
