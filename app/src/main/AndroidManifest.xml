@@ -40,7 +40,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.wayne.homesecurity.HomeSecurityMainActivity" />
         </activity>
-
+        <activity
+            android:name=".ViewReportActivity"
+            android:label="View Intrusion Report">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.wayne.homesecurity.HomeSecurityMainActivity" />
+        </activity>
     </application>
 
 </manifest>
