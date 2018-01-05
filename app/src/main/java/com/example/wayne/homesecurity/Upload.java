@@ -52,6 +52,10 @@ public class Upload{
         return startTime;
     }
 
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
     public String getEndTime() {
         return endTime;
     }

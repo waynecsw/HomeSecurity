@@ -57,36 +57,45 @@ public class ViewReportActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 uploads.clear();
 
+                List<Upload> uploadFirstVer = new ArrayList<Upload>();
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Upload upload = new Upload(postSnapshot.getKey(), postSnapshot.getValue().toString());
+                    uploadFirstVer.add(upload);
+                }
+
                 int counter = 0;
-                int number = 0;
+                int number = 1;
                 String startTime = "";
                 String endTime = "";
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    //if(!uploads.isEmpty()) {
-                        for (Upload u : uploads) {
-                            if(counter==0) {
-                                startTime = postSnapshot.getKey().substring(9, 15);
-                                Toast.makeText(ViewReportActivity.this, postSnapshot.getKey().substring(9, 15), Toast.LENGTH_SHORT).show();
-                                endTime = postSnapshot.getKey().substring(9, 15);
-                            } else if(counter>0) {
-                                endTime = postSnapshot.getKey().substring(9, 15);
-                                //Toast.makeText(ViewReportActivity.this, postSnapshot.getKey().substring(9, 15), Toast.LENGTH_SHORT).show();
-                            }
-                            if (u.getDate().equals(postSnapshot.getKey().substring(0, 8))) {
-                                counter++;
+                    for (Upload u : uploads) {
+                        if (u.getName().substring(0, 8).equals(postSnapshot.getKey().substring(0, 8))) {
+                            counter++;
+                        } else if(u.getUrl().toString().equals(uploadFirstVer.get(uploadFirstVer.size()-1).getUrl())) {
+                            counter = 0;
+                        } else {
+                            counter = 0;
+                       }
+                    }
+
+                    if (counter == 0) {
+                        startTime = postSnapshot.getKey().substring(9, 15);
+                        endTime = postSnapshot.getKey().substring(9, 15);
+                        for (Upload u : uploadFirstVer) {
+                            if (u.getName().substring(0, 8).equals(postSnapshot.getKey().substring(0, 8))) {
+                                endTime = u.getName().substring(9, 15);
                             }
                         }
-                    //}
+                    } else if (counter > 0) {
+                        endTime = postSnapshot.getKey().substring(9, 15);
+                    }
 
                     if(counter==0) {
-                        number++;
                         Upload upload = new Upload(number+"", postSnapshot.getKey(), postSnapshot.getValue().toString(), postSnapshot.getKey().substring(0, 8), startTime, endTime);
-                        //Toast.makeText(ViewReportActivity.this, postSnapshot.getKey().substring(0, 8), Toast.LENGTH_SHORT).show();
                         uploads.add(upload);
+                        number++;
                     }
                 }
-                //Collections.reverse(uploads);
-
                 TableView<Upload> table = findViewById(R.id.tableView);
                 table.setHeaderAdapter(new SimpleTableHeaderAdapter(getApplicationContext(), "No.", "Date", "Start Time", "End Time"));
                 table.setDataAdapter(new ReportTableDataAdapter(getApplicationContext(), uploads));
@@ -113,26 +122,26 @@ class ReportTableDataAdapter extends TableDataAdapter<Upload> {
 
         switch (columnIndex) {
             case 0:
-                renderedView = renderNo();
+                renderedView = renderNo(upload);
                 break;
             case 1:
                 renderedView = renderDate(upload);
                 break;
             case 2:
-                renderedView = renderStartTime(upload);
+                renderedView = renderTime(upload, 0);
                 break;
             case 3:
-                renderedView = renderEndTime(upload);
+                renderedView = renderTime(upload, 1);
                 break;
         }
 
         return renderedView;
     }
 
-    public View renderNo() {
+    public View renderNo(Upload upload) {
 
         final TextView textView = new TextView(getContext());
-        textView.setText("1");
+        textView.setText(upload.getNumber());
         textView.setPadding(20, 40, 20, 40);
         textView.setTextSize(12);
 
@@ -161,13 +170,17 @@ class ReportTableDataAdapter extends TableDataAdapter<Upload> {
         return textView;
     }
 
-    public View renderStartTime(Upload upload) {
+    public View renderTime(Upload upload, int indicator) {
 
         final TextView textView = new TextView(getContext());
 
-        String date = upload.getStartTime();
+        String date;
+        if(indicator==0)
+            date = upload.getStartTime();
+        else
+            date = upload.getEndTime();
         DateFormat formatter = new SimpleDateFormat("HHmmSS");
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:SS");
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:SS a");
         Date convertedDate = new Date();
         try {
             convertedDate = (Date)formatter.parse(date);
@@ -182,28 +195,5 @@ class ReportTableDataAdapter extends TableDataAdapter<Upload> {
 
         return textView;
     }
-
-    public View renderEndTime(Upload upload) {
-
-        final TextView textView = new TextView(getContext());
-
-        String date = upload.getEndTime();
-        DateFormat formatter = new SimpleDateFormat("HHmmSS");
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:SS");
-        Date convertedDate = new Date();
-        try {
-            convertedDate = (Date)formatter.parse(date);
-            date = sdf.format(convertedDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        textView.setText(date);
-        textView.setPadding(20, 40, 20, 40);
-        textView.setTextSize(12);
-
-        return textView;
-    }
-
 }
 
