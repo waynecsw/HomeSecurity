@@ -118,6 +118,9 @@ public class HomeSecurityMainActivity extends AppCompatActivity
         } else if (id == R.id.nav_image) {
             Intent intent = new Intent(getApplicationContext(), ViewImageActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_report) {
+            Intent intent = new Intent(getApplicationContext(), ViewReportActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

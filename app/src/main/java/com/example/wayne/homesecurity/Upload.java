@@ -13,8 +13,6 @@ public class Upload{
     private String startTime;
     private String endTime;
 
-    // Default constructor required for calls to
-    // DataSnapshot.getValue(User.class)
     public Upload() {
     }
 
@@ -50,10 +48,6 @@ public class Upload{
 
     public String getStartTime() {
         return startTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
     }
 
     public String getEndTime() {
