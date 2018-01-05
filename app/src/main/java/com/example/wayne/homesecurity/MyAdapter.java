@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -33,7 +37,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Upload upload = uploads.get(position);
-        holder.textViewName.setText(upload.getName());
+
+        String date = upload.getName();
+        DateFormat formatter = new SimpleDateFormat("yyyyMMdd-HHmmSS");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm:SS a");
+        Date convertedDate = new Date();
+        try {
+            convertedDate = (Date)formatter.parse(date);
+            date = sdf.format(convertedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        holder.textViewName.setText("Captured on: " + date);
         Glide.with(context).load(upload.getUrl()).into(holder.imageView);
     }
 
