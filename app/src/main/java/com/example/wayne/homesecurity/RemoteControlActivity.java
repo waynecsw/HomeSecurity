@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 public class RemoteControlActivity extends AppCompatActivity {
     static String servoTopic = "csw/iot/servo";
     static String buzzerTopic = "csw/iot/buzzer";
+    static String photoTopic = "csw/iot/photo";
     static String MQTTHOST = "tcp://iot.eclipse.org:1883";
     MqttAndroidClient client;
     IMqttToken token;
@@ -38,6 +40,7 @@ public class RemoteControlActivity extends AppCompatActivity {
     private EditText address;
     private Button connect;
     private VideoView streamView;
+    private ImageButton snapBtn;
     private MediaController mediaController;
 
     @Override
@@ -56,6 +59,7 @@ public class RemoteControlActivity extends AppCompatActivity {
         address = findViewById(R.id.address);
         connect = findViewById(R.id.connect);
         streamView = findViewById(R.id.videoView);
+        snapBtn = findViewById(R.id.snap);
 
         camSeekbar.setOnSeekBarChangeListener(new seekBarListener());
 
@@ -72,6 +76,13 @@ public class RemoteControlActivity extends AppCompatActivity {
         connect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String s = address.getText().toString();
+                playStream(s);
+            }
+        });
+
+        snapBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                publishMQTT(photoTopic, "snap");
             }
         });
 
@@ -152,14 +163,14 @@ public class RemoteControlActivity extends AppCompatActivity {
         Uri UriSrc = Uri.parse(src);
         if (UriSrc == null) {
             Toast.makeText(RemoteControlActivity.this,
-                    "UriSrc == null", Toast.LENGTH_LONG).show();
+                    "UriSrc == null", Toast.LENGTH_SHORT).show();
         } else {
             streamView.setVideoURI(UriSrc);
             mediaController = new MediaController(this);
             streamView.setMediaController(mediaController);
             streamView.start();
 
-            Toast.makeText(RemoteControlActivity.this, "Connect: " + src, Toast.LENGTH_LONG).show();
+            Toast.makeText(RemoteControlActivity.this, "Connected to " + src, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -175,6 +186,8 @@ public class RemoteControlActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(RemoteControlActivity.this, "Alarm: Deactivated", Toast.LENGTH_SHORT).show();
                 }
+            } else if (topic.contains("photo")) {
+                Toast.makeText(RemoteControlActivity.this, "Photo Saved", Toast.LENGTH_SHORT).show();
             }
 
         } catch (MqttException e) {
