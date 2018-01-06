@@ -49,6 +49,7 @@ public class ViewChartActivity extends AppCompatActivity implements AdapterView.
     private ProgressDialog progressDialog;
     private DatabaseReference mDatabase;
     private List<Upload> uploadFirstVer;
+    private ValueEventListener dbValueListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class ViewChartActivity extends AppCompatActivity implements AdapterView.
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        dbValueListener = mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 progressDialog.dismiss();
@@ -143,6 +144,12 @@ public class ViewChartActivity extends AppCompatActivity implements AdapterView.
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        mDatabase.removeEventListener(dbValueListener);
+        super.onDestroy();
     }
 }
 

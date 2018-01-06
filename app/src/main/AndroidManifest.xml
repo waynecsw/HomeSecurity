@@ -54,6 +54,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.wayne.homesecurity.HomeSecurityMainActivity" />
         </activity>
+
+        <service
+            android:name=".FirebaseBackgroundService">
+        </service>
+
+        <receiver android:name=".StartFirebaseAtBoot" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" >
+                </action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

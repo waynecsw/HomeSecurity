@@ -14,10 +14,10 @@
 
         <item
             android:id="@+id/nav_report"
-            android:title="View Intrusion Records" />
+            android:title="View Motion Detection Records" />
 
         <item
             android:id="@+id/nav_cchart"
-            android:title="View Intrusion BarChart Report" />
+            android:title="View Motion Detection BarChart Report" />
     </group>
 </menu>
