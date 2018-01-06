@@ -47,7 +47,7 @@ public class ViewImageActivity extends AppCompatActivity {
                 uploads.clear();
 
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    Upload upload = new Upload(postSnapshot.getKey(), postSnapshot.getValue().toString());
+                    Upload upload = postSnapshot.getValue(Upload.class);
                     uploads.add(upload);
                 }
                 Collections.reverse(uploads);

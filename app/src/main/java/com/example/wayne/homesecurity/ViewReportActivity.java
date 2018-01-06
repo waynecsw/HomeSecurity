@@ -59,7 +59,7 @@ public class ViewReportActivity extends AppCompatActivity {
 
                 List<Upload> uploadFirstVer = new ArrayList<Upload>();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    Upload upload = new Upload(postSnapshot.getKey(), postSnapshot.getValue().toString());
+                    Upload upload = postSnapshot.getValue(Upload.class);
                     uploadFirstVer.add(upload);
                 }
 
