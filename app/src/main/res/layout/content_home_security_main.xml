@@ -1,47 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="60dp"
     tools:context="com.example.wayne.homesecurity.HomeSecurityMainActivity"
-    tools:showIn="@layout/app_bar_home_security_main"
-    android:layout_gravity="center_horizontal"
-    android:orientation="vertical">
+    tools:showIn="@layout/app_bar_home_security_main">
 
+    <View
+        android:id="@+id/centerVerticalShim"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerVertical="true"
+        android:visibility="invisible" />
 
+    <View
+        android:id="@+id/centerHorizontalShim"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/btnRemote"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/centerVerticalShim"
         android:text="Remote Control"
+        android:gravity="center"
+        android:layout_toLeftOf="@+id/centerHorizontalShim"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
         android:textSize="15dp"
         android:textStyle="bold"
+        android:textAllCaps="false"
         />
 
 
     <Button
         android:id="@+id/btnViewImg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="View Firebase Images"
+        android:layout_above="@+id/centerVerticalShim"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/centerHorizontalShim"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
         android:textSize="15dp"
         android:textStyle="bold"
+        android:textAllCaps="false"
         />
 
     <Button
@@ -50,30 +73,40 @@
         android:layout_height="wrap_content"
         android:text="View Motion Detection Records"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/centerVerticalShim"
+        android:layout_toLeftOf="@+id/centerHorizontalShim"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
         android:textSize="15dp"
         android:textStyle="bold"
+        android:textAllCaps="false"
         />
 
     <Button
         android:id="@+id/btnViewChart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View Motion Detection BarChart Report"
+        android:text="View Motion Detection Bar Chart Report"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/centerVerticalShim"
+        android:layout_toRightOf="@+id/centerHorizontalShim"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
         android:textSize="15dp"
         android:textStyle="bold"
+        android:textAllCaps="false"
         />
 
-</LinearLayout>
+</RelativeLayout>
