@@ -25,6 +25,7 @@ public class ViewImageActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private ProgressDialog progressDialog;
     private List<Upload> uploads;
+    private ValueEventListener dbValueListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class ViewImageActivity extends AppCompatActivity {
         progressDialog.show();
         mDatabase = FirebaseDatabase.getInstance().getReference(HomeSecurityMainActivity.DATABASE_PATH_UPLOADS);
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        dbValueListener = mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 progressDialog.dismiss();
@@ -53,7 +54,7 @@ public class ViewImageActivity extends AppCompatActivity {
                 Collections.reverse(uploads);
                 adapter = new MyAdapter(getApplicationContext(), uploads);
                 recyclerView.setAdapter(adapter);
-
+                Toast.makeText(ViewImageActivity.this, "Updated images from Firebase.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -61,6 +62,11 @@ public class ViewImageActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+    }
 
+    @Override
+    protected void onDestroy() {
+        mDatabase.removeEventListener(dbValueListener);
+        super.onDestroy();
     }
 }

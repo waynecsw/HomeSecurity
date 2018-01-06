@@ -35,6 +35,7 @@ public class ViewReportActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private DatabaseReference mDatabase;
     private List<Upload> uploads;
+    private ValueEventListener dbValueListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class ViewReportActivity extends AppCompatActivity {
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        dbValueListener = mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 progressDialog.dismiss();
@@ -99,6 +100,7 @@ public class ViewReportActivity extends AppCompatActivity {
                 TableView<Upload> table = findViewById(R.id.tableView);
                 table.setHeaderAdapter(new SimpleTableHeaderAdapter(getApplicationContext(), "No.", "Date", "Start Time", "End Time"));
                 table.setDataAdapter(new ReportTableDataAdapter(getApplicationContext(), uploads));
+                Toast.makeText(ViewReportActivity.this, "Updated report from Firebase.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -106,6 +108,12 @@ public class ViewReportActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        mDatabase.removeEventListener(dbValueListener);
+        super.onDestroy();
     }
 }
 
