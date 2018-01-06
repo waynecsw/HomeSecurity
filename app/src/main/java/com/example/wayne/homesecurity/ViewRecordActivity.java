@@ -3,10 +3,7 @@ package com.example.wayne.homesecurity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -22,7 +19,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -30,11 +26,12 @@ import de.codecrafters.tableview.TableDataAdapter;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
-public class ViewReportActivity extends AppCompatActivity {
+public class ViewRecordActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     private DatabaseReference mDatabase;
     private List<Upload> uploads;
+    private List<Upload> uploadFirstVer;
     private ValueEventListener dbValueListener;
 
     @Override
@@ -58,7 +55,7 @@ public class ViewReportActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 uploads.clear();
 
-                List<Upload> uploadFirstVer = new ArrayList<Upload>();
+                uploadFirstVer = new ArrayList<Upload>();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Upload upload = postSnapshot.getValue(Upload.class);
                     uploadFirstVer.add(upload);
@@ -100,7 +97,7 @@ public class ViewReportActivity extends AppCompatActivity {
                 TableView<Upload> table = findViewById(R.id.tableView);
                 table.setHeaderAdapter(new SimpleTableHeaderAdapter(getApplicationContext(), "No.", "Date", "Start Time", "End Time"));
                 table.setDataAdapter(new ReportTableDataAdapter(getApplicationContext(), uploads));
-                Toast.makeText(ViewReportActivity.this, "Updated report from Firebase.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewRecordActivity.this, "Updated report from Firebase.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -108,6 +105,7 @@ public class ViewReportActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+
     }
 
     @Override
@@ -204,4 +202,6 @@ class ReportTableDataAdapter extends TableDataAdapter<Upload> {
         return textView;
     }
 }
+
+
 

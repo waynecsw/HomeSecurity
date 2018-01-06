@@ -45,6 +45,7 @@ public class HomeSecurityMainActivity extends AppCompatActivity
         Button btnRemote = (Button) findViewById(R.id.btnRemote);
         Button btnViewImg = (Button) findViewById(R.id.btnViewImg);
         Button btnViewReport = (Button) findViewById(R.id.btnViewReport);
+        Button btnViewChart = (Button) findViewById(R.id.btnViewChart);
 
         btnRemote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +69,15 @@ public class HomeSecurityMainActivity extends AppCompatActivity
         btnViewReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ViewReportActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ViewRecordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnViewChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ViewChartActivity.class);
                 startActivity(intent);
             }
         });
@@ -119,7 +128,7 @@ public class HomeSecurityMainActivity extends AppCompatActivity
             Intent intent = new Intent(getApplicationContext(), ViewImageActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_report) {
-            Intent intent = new Intent(getApplicationContext(), ViewReportActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ViewRecordActivity.class);
             startActivity(intent);
         }
 

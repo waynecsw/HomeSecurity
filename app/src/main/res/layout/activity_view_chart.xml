@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.wayne.homesecurity.ViewRecordActivity">
+    tools:context="com.example.wayne.homesecurity.ViewChartActivity">
 
-    <include layout="@layout/content_view_report" />
+    <include layout="@layout/content_view_chart" />
 
 </android.support.design.widget.CoordinatorLayout>
