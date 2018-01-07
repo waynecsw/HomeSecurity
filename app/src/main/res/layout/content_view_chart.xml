@@ -56,7 +56,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Past Motion Detection Bar Chart Report"
+                android:text="Motion Detection Bar Chart Yearly Report"
                 android:textColor="@android:color/black"
                 android:textAlignment="center"
                 android:layout_marginTop="20dp"
@@ -64,11 +64,20 @@
                 android:textStyle="bold"
                 android:visibility="visible"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Number of Days Per Month With Detected Motion"
+                android:textColor="@android:color/black"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textSize="12dp"
+                android:visibility="visible"/>
 
             <com.github.mikephil.charting.charts.BarChart
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:id="@+id/chart"

@@ -49,7 +49,9 @@ public class ViewChartActivity extends AppCompatActivity implements AdapterView.
     private ProgressDialog progressDialog;
     private DatabaseReference mDatabase;
     private List<Upload> uploadFirstVer;
+    private List<Upload> uploads;
     private ValueEventListener dbValueListener;
+    private int[] counter = {0,0,0,0,0,0,0,0,0,0,0,0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class ViewChartActivity extends AppCompatActivity implements AdapterView.
             public void onDataChange(DataSnapshot snapshot) {
                 progressDialog.dismiss();
                 uploadFirstVer = new ArrayList<Upload>();
+                uploads = new ArrayList<Upload>();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Upload upload = postSnapshot.getValue(Upload.class);
                     uploadFirstVer.add(upload);
@@ -101,15 +104,36 @@ public class ViewChartActivity extends AppCompatActivity implements AdapterView.
         ArrayList<BarEntry> entries = new ArrayList<>();
         int count = 0;
         int count2 = 0;
+        int count3 = 0;
         for(int i=1; i<month.length; i++) {
-            count2 = 0;
             for(Upload u: uploadFirstVer) {
-                if(u.getName().substring(4,6).equals(monthNum[i-1])&&u.getName().substring(0,4).equals(year)) {
+                if (u.getName().substring(4, 6).equals(monthNum[i - 1]) && u.getName().substring(0, 4).equals(year)) {
+                    if (uploads.isEmpty()) {
+                        count3++;
+                        uploads.add(u);
+                    } else {
+                        for (Upload up : uploads) {
+                            if (up.getName().substring(0, 8).equals(u.getName().substring(0, 8))) {
+                                count2++;
+                            }
+                        }
+                        if (count2 == 0) {
+                            uploads.add(u);
+                            count3++;
+                        }
+                    }
+                } else {
                     count2++;
                 }
+                count2 = 0;
             }
+            counter[i-1] = count3;
+            count3 = 0;
+        }
+
+        for(int i=0; i<counter.length; i++) {
             count++;
-            entries.add(new BarEntry(count, count2));
+            entries.add(new BarEntry(count, counter[i]));
         }
 
         BarDataSet dataSet = new BarDataSet(entries, "");
