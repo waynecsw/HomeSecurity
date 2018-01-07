@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "910064556697",
-    "firebase_url": "https://iothomesecurity.firebaseio.com",
-    "project_id": "iothomesecurity",
-    "storage_bucket": "iothomesecurity.appspot.com"
+    "project_number": "297162271566",
+    "firebase_url": "https://iothomesecurity-5f0b7.firebaseio.com",
+    "project_id": "iothomesecurity-5f0b7",
+    "storage_bucket": "iothomesecurity-5f0b7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:910064556697:android:00cdfab00c907737",
+        "mobilesdk_app_id": "1:297162271566:android:00cdfab00c907737",
         "android_client_info": {
           "package_name": "com.example.wayne.homesecurity"
         }
       },
       "oauth_client": [
         {
-          "client_id": "910064556697-86m1utge3iksabc81ckkv4dagertu4fn.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.wayne.homesecurity",
-            "certificate_hash": "b74b3da7e32ede4f42806c9e55f703a9a38cf00a"
-          }
-        },
-        {
-          "client_id": "910064556697-5r8cjgj0qc9msbpdtlj3l68deh0honbf.apps.googleusercontent.com",
+          "client_id": "297162271566-vo7mgbunjfmi5soecog9r6hspg8flccr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDEGS1zx-7fyyVwfb7ZCla7st6UYcj3cyA"
+          "current_key": "AIzaSyBgo5lfEBn5rfOoR5IYgIrExiNAK7x6V4c"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "910064556697-5r8cjgj0qc9msbpdtlj3l68deh0honbf.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
